@@ -63,7 +63,7 @@ module GoodData
                 when "string","Varchar","varchar"
                   type = "string-255"
                 when "integer"
-                  type = "decimal-16-4"
+                  type = "integer"
                 when /^decimal\((\d*),(\d*)\)/
                   type = "decimal-#{$1}-#{$2}"
                 when /^decimal-(\d*)-(\d*)/
