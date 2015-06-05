@@ -162,7 +162,7 @@ module GoodData
           metadata_entity = @metadata.get_entity(entity_name)
           local_path = @backend_opts["local_path"] || "source/" + entity_name + "/"
           link_file = create_link_file(metadata_entity)
-          if (!link_file.files.empty?)
+          #if (!link_file.files.empty?)
             local_path = link_file.create_file
             metadata_entity.store_runtime_param("source_filename",local_path)
             metadata_entity.store_runtime_param("batch",@batch.get_remote_filename)
@@ -171,7 +171,7 @@ module GoodData
             # Upload data from local storage to S3
             response = @metadata.save_data(metadata_entity)
             @batch.add_file(entity_name,response[:path])
-          end
+          #end
 
         end
 
