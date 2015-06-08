@@ -152,7 +152,7 @@ module GoodData
           remote_files = @backend.list(remote_folder)
 
           remote_files.each do |a|
-            link_file.add_file(a.key) if a.key[/#{prefix}/]
+            link_file.add_file(a.key) if a.key[/#{prefix}/] && !a.key[/\/_temporary\//]
           end
           link_file
         end
