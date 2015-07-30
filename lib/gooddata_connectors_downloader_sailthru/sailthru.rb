@@ -28,7 +28,7 @@ module GoodData
         end
 
         def connect
-          puts '[SAILTHRU_LOG_INFO] Running the Sailthru downloader'
+          puts '[SAILTHRU_LOG][INFO] Running the Sailthru downloader'
           # database_type = @metadata.get_configuration_by_type_and_key(@type, 'type')
           source_type = @metadata.get_configuration_by_type_and_key(@type, 'type')
           @backend_opts = @metadata.get_configuration_by_type_and_key(@type, 'options')
@@ -46,7 +46,7 @@ module GoodData
 
         def load_metadata(entity_name)
           metadata_entity = @metadata.get_entity(entity_name)
-          puts "[SAILTHRU_LOG_INFO] Load metadata for entity #{entity_name}."
+          puts "[SAILTHRU_LOG][INFO] Load metadata for entity #{entity_name}."
           #current_entity_version = @manifests_data[entity_name].first[:version]
           if (!metadata_entity.disabled?)
             temporary_fields = []
@@ -130,7 +130,7 @@ module GoodData
                 end
               end
             end
-            puts "[SAILTHRU_LOG_INFO] Saving entity #{metadata_entity}."
+            puts "[SAILTHRU_LOG][INFO] Saving entity #{metadata_entity}."
             metadata.save_entity(metadata_entity)
           end
         end
@@ -152,7 +152,10 @@ module GoodData
           remote_files = @backend.list(remote_folder)
 
           remote_files.each do |a|
-            link_file.add_file(a.key) if a.key[/#{prefix}/] && !a.key[/\/_temporary\//]
+            if a.key[/#{prefix}/] && !a.key[/\/_temporary\//]
+              puts "[SAILTHRU_LOG][DEBUG] Adding file #{a.key} to link file."
+              link_file.add_file(a.key)
+            end
           end
           link_file
         end
