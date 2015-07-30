@@ -148,6 +148,8 @@ module GoodData
           # skip entities that are not part of any collection
           return link_file if collection.nil?
 
+          puts "[SAILTHRU_LOG][INFO] Creating link file for entity #{entity}. Collection: #{collection}. Prefix: #{prefix}."
+
           remote_folder = @backend_opts["folder"] + @timestamp + '/' + @group_id + '/' + collection + '/'
           remote_files = @backend.list(remote_folder)
 
